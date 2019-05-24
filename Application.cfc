@@ -3,59 +3,77 @@
 * www.ortussolutions.com
 * ---
 */
-component{
-	// Application properties
-	this.name = hash( getCurrentTemplatePath() );
-	this.sessionManagement = true;
-	this.sessionTimeout = createTimeSpan(0,0,30,0);
-	this.setClientCookies = true;
+component {
+// Application properties
+	this.name = left( 'appName_' & hash( getCurrentTemplatePath() ), 64 );
 
-	// Java Integration
-	this.javaSettings = { 
-		loadPaths = [ ".\lib" ], 
-		loadColdFusionClassPath = true, 
-		reloadOnChange= false 
+	this.applicationTimeout = createTimeSpan( 10,0,0,0 );
+	this.sessionManagement = true;
+	this.sessionTimeout = createTimeSpan( 0,0,30,0 );
+	this.setClientCookies = true;
+	this.clientManagement = false;
+
+// stop bots creating sessions
+	if( structKeyExists( cookie,'JSESSIONID' ) || structKeyExists( cookie, 'CFTOKEN' ) ) {
+		this.sessionTimeout = createTimeSpan( 0,0,120,0 );
+	} else {
+		this.sessionTimeout = createTimeSpan( 0,0,0,1 );
+	}
+
+	this.mappings[ '/app' ] = expandPath( '../app' );
+	this.mappings[ '/coldbox' ] = expandPath( '../coldbox' );
+
+// Java Integration
+	this.javaSettings = {
+		loadPaths = [ '/app/lib' ],
+		loadColdFusionClassPath = true,
+		reloadOnChange= false
 	};
 
-	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
+// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = getDirectoryFromPath( getCurrentTemplatePath() );
-	// The web server mapping to this application. Used for remote purposes or static purposes
-	COLDBOX_APP_MAPPING   = "";
-	// COLDBOX PROPERTIES
-	COLDBOX_CONFIG_FILE 	 = "";
-	// COLDBOX APPLICATION KEY OVERRIDE
-	COLDBOX_APP_KEY 		 = "";
+// The web server mapping to this application. Used for remote purposes or static purposes
+	COLDBOX_APP_MAPPING = '';
+// COLDBOX PROPERTIES
+	COLDBOX_CONFIG_FILE = 'app.config.Coldbox';
+// COLDBOX APPLICATION KEY OVERRIDE
+	COLDBOX_APP_KEY = '';
 
-	// application start
-	public boolean function onApplicationStart(){
+	setLocale('English (UK)');
+	setTimezone( 'UTC' );
+
+	setEncoding( 'url', 'utf-8' );
+	setEncoding( 'form', 'utf-8' );
+
+// application start
+	public boolean function onApplicationStart() {
 		application.cbBootstrap = new coldbox.system.Bootstrap( COLDBOX_CONFIG_FILE, COLDBOX_APP_ROOT_PATH, COLDBOX_APP_KEY, COLDBOX_APP_MAPPING );
 		application.cbBootstrap.loadColdbox();
 		return true;
 	}
 
-	// application end
-	public void function onApplicationEnd( struct appScope ){
+// application end
+	public void function onApplicationEnd( struct appScope ) {
 		arguments.appScope.cbBootstrap.onApplicationEnd( arguments.appScope );
 	}
 
-	// request start
-	public boolean function onRequestStart( string targetPage ){
-		// Process ColdBox Request
+// request start
+	public boolean function onRequestStart( string targetPage ) {
+// Process ColdBox Request
 		application.cbBootstrap.onRequestStart( arguments.targetPage );
 
 		return true;
 	}
 
-	public void function onSessionStart(){
+	public void function onSessionStart() {
 		application.cbBootStrap.onSessionStart();
 	}
 
-	public void function onSessionEnd( struct sessionScope, struct appScope ){
+	public void function onSessionEnd( struct sessionScope, struct appScope ) {
 		arguments.appScope.cbBootStrap.onSessionEnd( argumentCollection=arguments );
 	}
 
-	public boolean function onMissingTemplate( template ){
+	public boolean function onMissingTemplate( template ) {
 		return application.cbBootstrap.onMissingTemplate( argumentCollection=arguments );
 	}
-
 }

@@ -1,141 +1,104 @@
-﻿component{
-
-	// Configure ColdBox Application
-	function configure(){
-
-		// coldbox directives
+﻿component {
+// configure coldbox application
+	function configure() {
+// coldbox directives
 		coldbox = {
-			//Application Setup
-			appName 				= "Your app name here",
-			eventName 				= "event",
+// application setup
+			appName = 'appName',
+			eventName = 'event',
 
-			//Development Settings
-			reinitPassword			= "",
-			handlersIndexAutoReload = true,
+// production settings
+			reinitPassword = '',
+			handlersIndexAutoReload = false,
 
-			//Implicit Events
-			defaultEvent			= "",
-			requestStartHandler		= "Main.onRequestStart",
-			requestEndHandler		= "",
-			applicationStartHandler = "Main.onAppInit",
-			applicationEndHandler	= "",
-			sessionStartHandler 	= "",
-			sessionEndHandler		= "",
-			missingTemplateHandler	= "",
+// implicit events
+			defaultEvent = '',
+			requestStartHandler = 'Default.onRequestStart',
+			requestEndHandler = '',
+			applicationStartHandler = 'Default.onAppInit',
+			applicationEndHandler = '',
+			sessionStartHandler = '',
+			sessionEndHandler = '',
+			missingTemplateHandler = '',
 
-			//Extension Points
-			applicationHelper 			= "includes/helpers/ApplicationHelper.cfm",
-			viewsHelper					= "",
-			modulesExternalLocation		= [],
-			viewsExternalLocation		= "",
-			layoutsExternalLocation 	= "",
-			handlersExternalLocation  	= "",
-			requestContextDecorator 	= "",
-			controllerDecorator			= "",
+// extension points
+			applicationHelper = '/app/includes/helpers/ApplicationHelper.cfm',
+			viewsHelper = '',
+			modulesExternalLocation = [ '/app/modules' ],
+			viewsExternalLocation = '/app/views',
+			layoutsExternalLocation = '/app/layouts',
+			handlersExternalLocation = 'app.handlers',
+			requestContextDecorator = '',
+			controllerDecorator = '',
 
-			//Error/Exception Handling
-			invalidHTTPMethodHandler 	= "",
-			exceptionHandler			= "main.onException",
-			invalidEventHandler			= "",
-			customErrorTemplate			= "",
+// error/exception handling
+			invalidHTTPMethodHandler = '',
+			exceptionHandler = 'Default.onException',
+			invalidEventHandler = '',
+			customErrorTemplate = '',
 
-			//Application Aspects
-			handlerCaching 			= false,
-			eventCaching			= false,
-			viewCaching				= false
+// application aspects
+			handlerCaching = true,
+			eventCaching = true,
+			viewCaching = true
 		};
 
-		// custom settings
-		settings = {
+// custom settings
+		settings = {};
 
-		};
-
-		// environment settings, create a detectEnvironment() method to detect it yourself.
-		// create a function with the name of the environment so it can be executed if that environment is detected
-		// the value of the environment is a list of regex patterns to match the cgi.http_host.
+// environment settings, create a detectenvironment() method to detect it yourself.
+// create a function with the name of the environment so it can be executed if that environment is
+// detected the value of the environment is a list of regex patterns to match the cgi.http_host.
 		environments = {
-			development = "localhost,^127\.0\.0\.1"
+			development = 'localhost,^127\.0\.0\.1'
 		};
 
-		// Module Directives
+// module directives
 		modules = {
-			// An array of modules names to load, empty means all of them
-			include = [],
-			// An array of modules names to NOT load, empty means none
-			exclude = []
+			include = [], // an array of modules names to load, empty means all of them
+			exclude = [] // an array of modules names to not load, empty means none
 		};
 
-		//LogBox DSL
+// logbox dsl
 		logBox = {
-			// Define Appenders
+// define appenders
 			appenders = {
-				coldboxTracer = { class="coldbox.system.logging.appenders.ConsoleAppender" }
+				coldboxTracer = { class='coldbox.system.logging.appenders.ConsoleAppender' }
 			},
-			// Root Logger
-			root = { levelmax="INFO", appenders="*" },
-			// Implicit Level Categories
-			info = [ "coldbox.system" ]
+// root logger
+			root = { levelmax='INFO', appenders='*' },
+// implicit level categories
+			info = [ 'coldbox.system' ]
 		};
 
-		//Layout Settings
+// layout settings
 		layoutSettings = {
-			defaultLayout = "",
-			defaultView   = ""
+			defaultLayout = '',
+			defaultView = ''
 		};
 
-		//Interceptor Settings
+// interceptor settings
 		interceptorSettings = {
-			customInterceptionPoints = ""
+			customInterceptionPoints = ''
 		};
 
-		//Register interceptors as an array, we need order
-		interceptors = [
-		];
-
-		/*
-		// module setting overrides
-		moduleSettings = {
-			moduleName = {
-				settingName = "overrideValue"
-			}
-		};
-
-		// flash scope configuration
-		flash = {
-			scope = "session,client,cluster,ColdboxCache,or full path",
-			properties = {}, // constructor properties for the flash scope implementation
-			inflateToRC = true, // automatically inflate flash data into the RC scope
-			inflateToPRC = false, // automatically inflate flash data into the PRC scope
-			autoPurge = true, // automatically purge flash data for you
-			autoSave = true // automatically save flash scopes at end of a request and on relocations.
-		};
-
-		//Register Layouts
-		layouts = [
-			{ name = "login",
-		 	  file = "Layout.tester.cfm",
-			  views = "vwLogin,test",
-			  folders = "tags,pdf/single"
-			}
-		];
-
-		//Conventions
-		conventions = {
-			handlersLocation = "handlers",
-			viewsLocation 	 = "views",
-			layoutsLocation  = "layouts",
-			modelsLocation 	 = "models",
-			eventAction 	 = "index"
-		};
-		*/
-
+// register interceptors as an array, we need order
+		interceptors = [];
 	}
 
-	/**
-	* Development environment
-	*/
-	function development(){
-		coldbox.customErrorTemplate = "/coldbox/system/includes/BugReport.cfm";
-	}
+/**
+* Development environment
+*/
+	function development() {
+		coldbox.reinitPassword = '1';
 
+		coldbox.handlersIndexAutoReload = true;
+		coldbox.handlerCaching = false;
+		coldbox.eventCaching = false;
+		coldbox.viewCaching = false;
+
+		coldbox.customErrorTemplate = '/coldbox/system/includes/BugReport.cfm';
+
+		wirebox.singletonReload = true;
+	}
 }
