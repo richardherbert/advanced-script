@@ -73,8 +73,8 @@
 
 // layout settings
 		layoutSettings = {
-			defaultLayout = '',
-			defaultView = ''
+			defaultLayout = 'default'
+			,defaultView = 'index'
 		};
 
 // interceptor settings
