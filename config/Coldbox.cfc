@@ -12,7 +12,7 @@
 			handlersIndexAutoReload = false,
 
 // implicit events
-			defaultEvent = '',
+			defaultEvent = 'default.index',
 			requestStartHandler = 'Default.onRequestStart',
 			requestEndHandler = '',
 			applicationStartHandler = 'Default.onAppInit',
