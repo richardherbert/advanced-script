@@ -12,14 +12,15 @@
 			handlersIndexAutoReload = false,
 
 // implicit events
-			defaultEvent = 'default.index',
-			requestStartHandler = 'Default.onRequestStart',
-			requestEndHandler = '',
-			applicationStartHandler = 'Default.onAppInit',
-			applicationEndHandler = '',
-			sessionStartHandler = '',
-			sessionEndHandler = '',
-			missingTemplateHandler = '',
+			defaultEvent = 'Default.index',
+
+			requestStartHandler = 'ImplicitEvents.onRequestStart',
+			requestEndHandler = 'ImplicitEvents.onRequestEnd',
+			applicationStartHandler = 'ImplicitEvents.onApplicationStart',
+			applicationEndHandler = 'ImplicitEvents.onApplicationEnd',
+			sessionStartHandler = 'ImplicitEvents.onSessionStart',
+			sessionEndHandler = 'ImplicitEvents.onSessionEnd',
+			missingTemplateHandler = 'ImplicitEvents.onMissingTemplate',
 
 // extension points
 			applicationHelper = '/app/includes/helpers/ApplicationHelper.cfm',
@@ -33,8 +34,8 @@
 
 // error/exception handling
 			invalidHTTPMethodHandler = '',
-			exceptionHandler = 'Default.onException',
-			invalidEventHandler = '',
+			exceptionHandler = 'ImplicitEvents.onException',
+			invalidEventHandler = 'ImplicitEvents.invalidEvent',
 			customErrorTemplate = '',
 
 // application aspects
