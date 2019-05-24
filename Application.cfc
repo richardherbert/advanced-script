@@ -21,7 +21,8 @@ component {
 	}
 
 	this.mappings[ '/app' ] = expandPath( '../app' );
-	this.mappings[ '/coldbox' ] = expandPath( '../coldbox' );
+	this.mappings[ '/coldbox' ] = expandPath( '../org/coldbox' );
+	this.mappings[ '/testbox' ] = expandPath( '../org/testbox' );
 
 // Java Integration
 	this.javaSettings = {
