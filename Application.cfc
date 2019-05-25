@@ -24,6 +24,27 @@ component {
 	this.mappings[ '/coldbox' ] = expandPath( '../org/coldbox' );
 	this.mappings[ '/testbox' ] = expandPath( '../org/testbox' );
 
+	this.datasources[ '{{dns}}' ] = {
+// required
+		 type: 'mysql'
+		,host: getProfileString( '.env', 'datasource', 'HOST' )
+		,port: getProfileString( '.env', 'datasource', 'PORT' )
+		,database: getProfileString( '.env', 'datasource', 'DATABASE' )
+		,username: getProfileString( '.env', 'datasource', 'USERNAME' )
+		,password: getProfileString( '.env', 'datasource', 'PASSWORD' )
+// optional
+		,connectionLimit: 100 // how many connections are allowed maximal (-1 == infiniti)
+		// ,connectionTimeout: 1 // connection timeout in minutes (0 == connection is released after usage)
+		,timezone: 'UTC'  // if set Lucee change the environment timezone
+		,custom: { // a struct that contains type specific settings
+			 useUnicode: true
+			,useLegacyDatetimeCode: true
+			,characterEncoding: 'UTF-8'
+		}
+	};
+
+	this.datasource = '{{dns}}';
+
 // Java Integration
 	this.javaSettings = {
 		loadPaths = [ '/app/lib' ],
