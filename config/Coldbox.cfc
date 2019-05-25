@@ -4,11 +4,11 @@
 // coldbox directives
 		coldbox = {
 // application setup
-			appName = 'appName',
+			appName = '{{appName}}',
 			eventName = 'event',
 
 // production settings
-			reinitPassword = '',
+			reinitPassword = '{{reinitPassword}}',
 			handlersIndexAutoReload = false,
 
 // implicit events
@@ -54,6 +54,22 @@
 			development = 'localhost,^127\.0\.0\.1'
 		};
 
+		mailsettings = {
+			tokenMarker = '@'
+			,port: '25'
+			,protocol = {
+				class: 'mailgunprotocol.models.protocols.mailgunProtocol'
+			}
+		};
+
+		moduleSettings = {
+			mailguncfc = {
+				 secretApiKey: '{{mailgunAPIKey}}'
+				,publicApiKey: '{{mailgunAPIPublicKey}}'
+				,domain: '{{domain}}'
+			}
+		};
+
 // module directives
 		modules = {
 			include = [], // an array of modules names to load, empty means all of them
@@ -84,7 +100,19 @@
 		};
 
 // register interceptors as an array, we need order
-		interceptors = [];
+		interceptors = [
+			{
+				name : 'ApplicationSecurity'
+				,class: 'cbsecurity.interceptors.Security'
+				,properties: {
+					 validatorModel: 'models.services.SecurityService'
+					,rulesSource: 'db'
+					,rulesDSN: '{{dsn}}'
+					,rulesTable: 'cbsecurity'
+					,rulesOrderBy: 'sortOrder'
+				}
+			}
+		];
 	}
 
 /**
@@ -101,5 +129,11 @@
 		coldbox.customErrorTemplate = '/coldbox/system/includes/BugReport.cfm';
 
 		wirebox.singletonReload = true;
+
+		mailsettings.server = 'localhost';
+		mailsettings.port = '2525';
+		mailsettings.username = '';
+		mailsettings.password = '';
+		mailsettings.protocol.class = 'modules.cbmailservices.models.protocols.CFMailProtocol';
 	}
 }
