@@ -1,4 +1,4 @@
-﻿component extends='coldbox.system.EventHandler' {
+﻿component extends='BaseHandler' {
 	function index( event, rc, prc ) {
 		prc.welcomeMessage = 'Welcome to ColdBox!';
 

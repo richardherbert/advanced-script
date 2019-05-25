@@ -1,4 +1,4 @@
-﻿component extends='coldbox.system.EventHandler' {
+﻿component extends='BaseHandler' {
 	function onApplicationStart( event, rc, prc ) {}
 
 	function onRequestStart( event, rc, prc ) {}
