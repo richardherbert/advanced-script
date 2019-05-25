@@ -5,7 +5,7 @@
 */
 component {
 // Application properties
-	this.name = left( 'appName_' & hash( getCurrentTemplatePath() ), 64 );
+	this.name = left( '{{domain}}_' & hash( getCurrentTemplatePath() ), 64 );
 
 	this.applicationTimeout = createTimeSpan( 10,0,0,0 );
 	this.sessionManagement = true;

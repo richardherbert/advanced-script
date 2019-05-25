@@ -4,7 +4,7 @@
 // coldbox directives
 		coldbox = {
 // application setup
-			appName = '{{appName}}',
+			appName = '{{domain}}',
 			eventName = 'event',
 
 // production settings
@@ -51,7 +51,7 @@
 // create a function with the name of the environment so it can be executed if that environment is
 // detected the value of the environment is a list of regex patterns to match the cgi.http_host.
 		environments = {
-			development = 'localhost,^127\.0\.0\.1'
+			development = 'localhost,^127\.0\.0\.1,{{domain}}'
 		};
 
 		mailsettings = {
@@ -66,7 +66,7 @@
 			mailguncfc = {
 				 secretApiKey: '{{mailgunAPIKey}}'
 				,publicApiKey: '{{mailgunAPIPublicKey}}'
-				,domain: '{{domain}}'
+				,domain: '{{domain}}{{tld}}'
 			}
 		};
 
