@@ -1,0 +1,17 @@
+image: samueldebruyn/debian-git
+
+pipelines:
+  default:
+    - step:
+        script:
+          - echo "Everything is awesome!"
+  branches:
+    master:
+    - step:
+        script:
+          - apt-get init
+          - apt-get -qq install git-ftp
+
+          - git ftp push --user $FTP_USERNAME --passwd $FTP_PASSWORD $FTP_CONNECTION
+
+          - curl https://{{domain}}/?fwreinit=$FW_REINIT
