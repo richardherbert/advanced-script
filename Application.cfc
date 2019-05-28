@@ -24,7 +24,7 @@ component {
 	this.mappings[ '/coldbox' ] = expandPath( '../org/coldbox' );
 	this.mappings[ '/testbox' ] = expandPath( '../org/testbox' );
 
-	this.datasources[ '{{dns}}' ] = {
+	this.datasources[ '{{dsn}}' ] = {
 // required
 		 type: 'mysql'
 		,host: getProfileString( '.env', 'datasource', 'HOST' )
@@ -43,7 +43,7 @@ component {
 		}
 	};
 
-	this.datasource = '{{dns}}';
+	this.datasource = '{{dsn}}';
 
 // Java Integration
 	this.javaSettings = {
