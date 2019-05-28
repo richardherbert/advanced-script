@@ -21,6 +21,9 @@ component {
 	}
 
 	this.mappings[ '/app' ] = expandPath( '../app' );
+	this.mappings[ '/cbsecurity' ] = expandPath( '../app/modules/cbsecurity' );
+
+
 	this.mappings[ '/coldbox' ] = expandPath( '../org/coldbox' );
 	this.mappings[ '/testbox' ] = expandPath( '../org/testbox' );
 
