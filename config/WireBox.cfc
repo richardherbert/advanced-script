@@ -20,7 +20,7 @@
 			customScopes = {},
 
 // Package scan locations
-			scanLocations = [],
+			scanLocations = [ 'app.models.beans' ],
 
 // Stop Recursions
 			stopRecursions = [],
@@ -32,6 +32,7 @@
 			listeners = []
 		};
 
-// Map Bindings below
+// map all cfcs in this directory and subdirectories
+		mapDirectory( 'app.models.services' ).asSingleton();
 	}
 }
