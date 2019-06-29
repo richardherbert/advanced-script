@@ -5,7 +5,8 @@ WEB-INF
 # logs
 logs/*.*
 
-/org/testbox
-/webroot/.env
+/testbox
+
 .properties
-/.vscode
+.vscode
+.env
