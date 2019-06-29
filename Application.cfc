@@ -20,12 +20,12 @@ component {
 		this.sessionTimeout = createTimeSpan( 0,0,0,1 );
 	}
 
-	this.mappings[ '/app' ] = expandPath( '../app' );
-	this.mappings[ '/cbsecurity' ] = expandPath( '../app/modules/cbsecurity' );
-	this.mappings[ '/models' ] = expandPath( '../app/models' );
+	// this.mappings[ '/app' ] = expandPath( '../app' );
+	// this.mappings[ '/cbsecurity' ] = expandPath( '../app/modules/cbsecurity' );
+	// this.mappings[ '/models' ] = expandPath( '../app/models' );
 
-	this.mappings[ '/coldbox' ] = expandPath( '../org/coldbox' );
-	this.mappings[ '/testbox' ] = expandPath( '../org/testbox' );
+	// this.mappings[ '/coldbox' ] = expandPath( '../org/coldbox' );
+	// this.mappings[ '/testbox' ] = expandPath( '../org/testbox' );
 
 	this.datasources[ '{{dsn}}' ] = {
 // required
@@ -60,7 +60,8 @@ component {
 // The web server mapping to this application. Used for remote purposes or static purposes
 	COLDBOX_APP_MAPPING = '';
 // COLDBOX PROPERTIES
-	COLDBOX_CONFIG_FILE = 'app.config.Coldbox';
+	// COLDBOX_CONFIG_FILE = 'app.config.Coldbox';
+	COLDBOX_CONFIG_FILE = '';
 // COLDBOX APPLICATION KEY OVERRIDE
 	COLDBOX_APP_KEY = '';
 
