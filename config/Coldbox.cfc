@@ -28,7 +28,7 @@
 			modulesExternalLocation = [ '/modules' ],
 			viewsExternalLocation = '/views',
 			layoutsExternalLocation = '/layouts',
-			handlersExternalLocation = 'app.handlers',
+			handlersExternalLocation = 'handlers',
 			requestContextDecorator = '',
 			controllerDecorator = '',
 
