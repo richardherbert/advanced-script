@@ -23,12 +23,12 @@
 			missingTemplateHandler = 'ImplicitEvents.onMissingTemplate',
 
 // extension points
-			applicationHelper = '/includes/helpers/ApplicationHelper.cfm',
+			applicationHelper = 'includes/helpers/ApplicationHelper.cfm',
 			viewsHelper = '',
-			modulesExternalLocation = [ '/modules' ],
-			viewsExternalLocation = '/views',
-			layoutsExternalLocation = '/layouts',
-			handlersExternalLocation = 'handlers',
+			modulesExternalLocation = [ '' ],
+			viewsExternalLocation = '',
+			layoutsExternalLocation = '',
+			handlersExternalLocation = '',
 			requestContextDecorator = '',
 			controllerDecorator = '',
 
