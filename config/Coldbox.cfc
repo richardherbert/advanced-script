@@ -23,11 +23,11 @@
 			missingTemplateHandler = 'ImplicitEvents.onMissingTemplate',
 
 // extension points
-			applicationHelper = '/app/includes/helpers/ApplicationHelper.cfm',
+			applicationHelper = '/includes/helpers/ApplicationHelper.cfm',
 			viewsHelper = '',
-			modulesExternalLocation = [ '/app/modules' ],
-			viewsExternalLocation = '/app/views',
-			layoutsExternalLocation = '/app/layouts',
+			modulesExternalLocation = [ '/modules' ],
+			viewsExternalLocation = '/views',
+			layoutsExternalLocation = '/layouts',
 			handlersExternalLocation = 'app.handlers',
 			requestContextDecorator = '',
 			controllerDecorator = '',
@@ -51,7 +51,7 @@
 // create a function with the name of the environment so it can be executed if that environment is
 // detected the value of the environment is a list of regex patterns to match the cgi.http_host.
 		environments = {
-			development = 'localhost,^127\.0\.0\.1,{{domain}}'
+			development = '^{{domain}},^localhost,^127\.0\.0\.1'
 		};
 
 		mailsettings = {
