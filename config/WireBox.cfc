@@ -20,7 +20,7 @@
 			customScopes = {},
 
 // Package scan locations
-			// scanLocations = [ 'models.beans' ],
+			scanLocations = [ 'models.beans' ],
 
 // Stop Recursions
 			stopRecursions = [],
@@ -33,6 +33,6 @@
 		};
 
 // map all cfcs in this directory and subdirectories
-		// mapDirectory( 'models.services' ).asSingleton();
+		mapDirectory( 'models.services' );
 	}
 }
