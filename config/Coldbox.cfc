@@ -4,7 +4,7 @@
 // coldbox directives
 		coldbox = {
 // application setup
-			appName = '{{domain}}',
+			appName = '{{appName}}',
 			eventName = 'event',
 
 // production settings
@@ -66,7 +66,7 @@
 			mailguncfc = {
 				 secretApiKey: '{{mailgunAPIKey}}'
 				,publicApiKey: '{{mailgunAPIPublicKey}}'
-				,domain: '{{domain}}{{tld}}'
+				,domain: '{{domain}}.{{tld}}'
 			}
 		};
 
