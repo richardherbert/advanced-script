@@ -1,5 +1,6 @@
 component extends='coldbox.system.EventHandler' {
 	property name='SecurityService' inject='services.SecurityService';
+	property name='MessageManager' inject='messagebox@cbmessagebox';
 
 	property name='logger' inject='logbox:logger:{this}';
 
@@ -11,6 +12,5 @@ component extends='coldbox.system.EventHandler' {
 
 	function preHandler( event, action, eventArguments, rc, prc ) {
 		event.paramPrivateValue( 'SecurityService', SecurityService );
-		event.paramPrivateValue( 'MessageManager', getInstance( 'messagebox@cbmessagebox' ) );
 	}
 }
