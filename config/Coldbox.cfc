@@ -45,7 +45,9 @@
 		};
 
 // custom settings
-		settings = {};
+		settings = {
+			adminEmailAddress: 'admin@{{domin}}.{{tld}}'
+		};
 
 // environment settings, create a detectenvironment() method to detect it yourself.
 // create a function with the name of the environment so it can be executed if that environment is
