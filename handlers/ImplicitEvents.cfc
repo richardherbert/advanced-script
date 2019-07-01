@@ -1,4 +1,4 @@
-﻿component extends='BaseHandler' {
+﻿component {
 	function onApplicationStart( event, rc, prc ) {}
 
 	function onRequestStart( event, rc, prc ) {}
@@ -14,8 +14,17 @@
 
 	function onException( event, rc, prc ) {
 		event.setHTTPHeader( statusCode = 500 );
-		//Grab Exception From private request collection, placed by ColdBox Exception Handling
+
+// Grab Exception From private request collection, placed by ColdBox Exception Handling
 		var exception = prc.exception;
-		//Place exception handler below:
+
+// Place exception handler below:
+	}
+
+	function invalidEvent( event, rc, prc ) {
+		echo( 'Event "#rc.event#" not found' );
+		abort;
+
+		writedump( var='#arguments#', label='arguments', expand=0, abort=1 );
 	}
 }
