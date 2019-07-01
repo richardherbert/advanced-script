@@ -1,9 +1,21 @@
 component singleton {
 	property name='wirebox' inject='wirebox';
 	property name='logger' inject='logbox:logger:{this}';
+	// property name='populator' inject='wirebox:populator';
+
+	// property name='ValidationManager' inject='ValidationManager@cbvalidation';
 
 	public BaseService function init() {
 		return this;
+	}
+
+	public array function getActiveRecords( required any entity, string sortOrder='' ) {
+		return wirebox.getInstance( entity )
+			.whereNull( 'dateDeleted' )
+			.when( sortOrder != '', function( sql ) {
+				sql.orderBy( sortOrder )
+			} )
+			.get();
 	}
 
 	public any function onMissingMethod( missingMethodName, missingMethodArguments ) {

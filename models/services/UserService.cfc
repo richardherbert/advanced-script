@@ -142,6 +142,190 @@ component extends='BaseService' singleton {
 		};
 	}
 
+
+
+
+
+
+/*
+	public struct function add( required struct properties ) {
+		param string properties.firstname='';
+		param string properties.lastname='';
+		param string properties.emailAddress='';
+		param string properties.languageID='';
+		param string properties.roleID='';
+
+		var dateCreated = dateUpdated = now();
+
+		try {
+			var record = QuickService
+				.create( {
+					firstname: properties.firstname
+					,lastname: properties.lastname
+					,emailAddress: properties.emailAddress
+					,password: createUUID()
+					,passwordSalt: createUUID()
+					,languageID: properties.languageID
+					,roleID: properties.roleID
+					,dateCreated: dateCreated
+					,dateUpdated: dateUpdated
+				} );
+		} catch( any exception ) {
+			logger.error( 'An error has occurred adding the #entityName# "#properties.emailAddress#"', exception );
+
+			return {
+				isSuccess: false
+				,isFailure: true
+				,message: 'An error has occurred adding the #entityName# "#properties.emailAddress#"'
+			};
+		}
+
+		return {
+			isSuccess: true
+			,isFailure: false
+			,message: 'The #entityName# "#properties.firstname# #properties.lastname#" has been added'
+		};
+	}
+
+	public struct function update( required struct properties ) {
+		try {
+			var record = QuickService
+				.findOrFail( properties.id )
+				.update( {
+					firstname: properties.firstname
+					,lastname: properties.lastname
+					,emailAddress: properties.emailAddress
+					,languageID: properties.languageID
+					,roleID: properties.roleID
+					,dateUpdated: now()
+				} );
+		} catch( any exception ) {
+			logger.error( 'An error has occurred updating the #entityName#', exception )
+
+			return {
+				isSuccess: false
+				,isFailure: true
+				,message: 'An error has occurred updating the #entityName#'
+			};
+
+			throw( exception.message, 'Application', exception.detail );
+		}
+
+		return {
+			isSuccess: true
+			,isFailure: false
+			,message: 'The #entityName# "#properties.firstname# #properties.lastname#" has been updated'
+		};
+	}
+
+	public struct function signin( required struct properties ) {
+		param properties.emailAddress = '';
+		param properties.password = '';
+
+		var users = QuickService
+			.where( 'emailAddress', properties.emailAddress )
+			.get();
+
+		if( users.len() != 1 ) {
+			return {
+				isSuccess: false
+				,isFailure: true
+				,message: 'Sorry, your sign in details have not been recognised'
+			};
+		}
+
+		var user = users.first();
+
+		if( user.getPassword() != user.hashPassword( properties.password ) ) {
+			logger.error( 'Password mismatch',  {
+				'userID': user.getID()
+				,'ip': getClientIP()
+				,'browser': cgi.http_user_agent
+				} )
+
+			return {
+				isSuccess: false
+				,isFailure: true
+				,message: 'Sorry, your sign in details have not been recognised'
+			};
+		}
+
+		SessionStorage.setVar( 'signedInUser', user );
+
+		logger.info( 'User "#properties.emailAddress#" signed in', {
+			'userID': user.getID()
+			,'ip': getClientIP()
+			,'browser': cgi.http_user_agent
+		} );
+
+		return {
+			isSuccess: true
+			,isFailure: false
+			,message: 'Signed in'
+		};
+	}
+
+
+
+
+	public array function getActiveRecords( string sortOrder='lastname' ) {
+		return super.getActiveRecords( entityName, sortOrder );
+	}
+
+	public struct function getDataTable( datatable ) {
+		var searchValue = trim( datatable[ 'search[value]' ] );
+
+		var records = QuickService
+			.when( searchValue != '' && searchValue.len() > 2, function( qb ) {
+				qb.where( 'name', 'like', '%#searchValue#%' )
+			} )
+			.andWhereNull( 'dateDeleted' )
+			.offset( datatable.start )
+			.take( datatable.length )
+			.orderBy( 'lastname', 'ASC')
+			.get();
+
+		var recordsTotal = QuickService.count();
+		var recordsFiltered = recordsTotal;
+
+		var dataSet = {}
+
+		var dataSet[ 'data' ] = [];
+
+		records.each( function( record ) {
+			dataSet[ 'data' ].append( {
+				'0': encodeForHTML( record.getFirstname() )
+				,'1': encodeForHTML( record.getLastname() )
+				,'2': encodeForHTML( record.getEmailAddress() )
+				,'3': encodeForHTML( record.getRole().getName() )
+				,'DT_RowId': encodeForHTML( record.getID() )
+			} );
+		} );
+
+		dataSet[ 'draw' ] = datatable.draw;
+		dataSet[ 'recordsTotal' ] = recordsTotal;
+		dataSet[ 'recordsFiltered' ] = recordsFiltered;
+
+		return dataSet;
+	}
+
+	function setLocale( acceptLanguage='en-GB' ) {
+		var preferredLocale = acceptLanguage.replace( '-', '_' );
+
+		if( acceptLanguage.len() == 2 ) {
+			preferredLocale = acceptLanguage & '_' & acceptLanguage.uCase();
+		}
+
+		try {
+			var language = LanguageService.findOrFail( preferredLocale );
+		} catch( any exception ) {
+			preferredLocale = 'en_GB';
+		}
+
+		return preferredLocale
+	}
+*/
+
 	private string function getClientIP() {
 		var response = '';
 
