@@ -1,9 +1,6 @@
 component singleton {
 	property name='wirebox' inject='wirebox';
 	property name='logger' inject='logbox:logger:{this}';
-	property name='populator' inject='wirebox:populator';
-
-	property name='ValidationManager' inject='ValidationManager@cbvalidation';
 
 	public BaseService function init() {
 		return this;

@@ -1,9 +1,7 @@
-component extends='BaseService' singleton {
+component singleton {
 	property name='SessionStorage' inject='sessionStorage@cbstorages';
 
 	public SecurityService function init() {
-		super.init();
-
 		return this;
 	}
 
