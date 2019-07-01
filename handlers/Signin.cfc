@@ -6,6 +6,8 @@
 	function preHandler( event, action, eventArguments, rc, prc ) {
 		super.preHandler( event, action, eventArguments, rc, prc );
 
+		entityName = 'User';
+
 		event.setLayout( 'blank' );
 	}
 
@@ -21,11 +23,9 @@
 		event.paramValue( 'emailAddress', '' );
 		event.paramValue( 'password', '' );
 
-		var user = populateModel( 'User' );
-
 		var validationResults = validateModel(
-			target = populateModel( 'User' )
-			,constraints = {
+			target=populateModel( entityName )
+			,constraints={
 				'EmailAddress': { required: true, size: '1..255', type: 'email' }
 				,'Password': { required: true }
 			}
@@ -41,8 +41,8 @@
 
 		if ( response.isFailure ) {
 			prc.MessageManager.setMessage(
-				 type = 'error'
-				,message = 'Sorry, your sign in details have not been recognised'
+				 type='error'
+				,message='Sorry, your sign in details have not been recognised'
 			);
 
 			SessionStorage.deleteVar( 'signedInUser' );
@@ -59,8 +59,8 @@
 		event.paramValue( 'emailAddress', '' );
 
 		var validationResults = getValidationManager().validate(
-			target = rc
-			,constraints = {
+			target=rc
+			,constraints={
 				emailAddress: {
 					 required: true
 					,size: '1..255'
@@ -74,8 +74,8 @@
 
 		if( validationResults.hasErrors() ) {
 			prc.MessageManager.setMessage(
-				 type = 'error'
-				,messageArray = validationResults.getAllErrors()
+				 type='error'
+				,messageArray=validationResults.getAllErrors()
 			);
 
 			relocate( 'signin.forgottenpassword' );
@@ -87,8 +87,8 @@
 
 		if( users.len() != 1 ) {
 			prc.MessageManager.setMessage(
-				type = 'error'
-				,message = 'Sorry, there is problem with the email address you provided'
+				type='error'
+				,message='Sorry, there is problem with the email address you provided'
 			);
 
 			relocate( 'signin.forgottenpassword' );
@@ -100,16 +100,16 @@
 
 		if( response.isFailure ) {
 			prc.MessageManager.setMessage(
-				type = 'error'
-				,message = 'Sorry, there is problem with the email address you provided'
+				type='error'
+				,message='Sorry, there is problem with the email address you provided'
 			);
 
 			relocate( 'signin.forgottenpassword' );
 		}
 
 		prc.MessageManager.setMessage(
-			type = 'success'
-			,message = 'An email has been sent to your inbox with details on how to choose a new password'
+			type='success'
+			,message='An email has been sent to your inbox with details on how to choose a new password'
 		);
 
 		relocate( 'signin' );
@@ -123,8 +123,8 @@
 
 	function passwordResetAction( event, rc, prc ) {
 		var validationResults = getValidationManager().validate(
-			target = rc
-			,constraints = {
+			target=rc
+			,constraints={
 				password: {
 					required: true
 					,requiredMessage: 'A Password is required'
@@ -139,8 +139,8 @@
 
 		if( validationResults.hasErrors() ) {
 			prc.MessageManager.setMessage(
-				type = 'error'
-				,messageArray = validationResults.getAllErrors()
+				type='error'
+				,messageArray=validationResults.getAllErrors()
 			);
 
 			relocate( 'signin.passwordreset.token.#rc.token#' );
@@ -150,16 +150,16 @@
 
 		if( response.isFailure ) {
 			prc.MessageManager.setMessage(
-				type = 'error'
-				,message = 'Sorry, that token is no longer valid'
+				type='error'
+				,message='Sorry, that token is no longer valid'
 			);
 
 			relocate( 'signin.forgottenpassword' );
 		}
 
 		prc.MessageManager.setMessage(
-			type = 'success'
-			,message = 'Your password has been reset. Please use it here to sign in'
+			type='success'
+			,message='Your password has been reset. Please use it here to sign in'
 		);
 
 		relocate( 'signin' );
