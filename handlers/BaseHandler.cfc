@@ -11,5 +11,6 @@ component extends='coldbox.system.EventHandler' {
 
 	function preHandler( event, action, eventArguments, rc, prc ) {
 		event.paramPrivateValue( 'SecurityService', SecurityService );
+		event.paramPrivateValue( 'MessageManager', getInstance( 'messagebox@cbmessagebox' ) );
 	}
 }
