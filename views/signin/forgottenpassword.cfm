@@ -2,7 +2,7 @@
 	<div>
 		<h1>Forgotten Password</h1>
 
-		#prc.MessageManager.renderIt()#
+		#getInstance( 'messagebox@cbmessagebox' ).renderIt()#
 
 		<form action="#event.buildLink( 'signin.forgottenpasswordaction' )#" method="POST">
 			<div >

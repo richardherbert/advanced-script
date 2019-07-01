@@ -2,7 +2,7 @@
 	<div>
 		<h1>Sign in</h1>
 
-		#prc.MessageManager.renderIt()#
+		#getInstance( 'messagebox@cbmessagebox' ).renderIt()#
 
 		<form action="#event.buildLink( 'signin.action' )#" method="POST">
 			<div>
