@@ -20,38 +20,32 @@ component {
 		this.sessionTimeout = createTimeSpan( 0,0,0,1 );
 	}
 
-	// this.mappings[ '/app' ] = expandPath( '../app' );
-	// this.mappings[ '/cbsecurity' ] = expandPath( '../app/modules/cbsecurity' );
 	this.mappings[ '/cbsecurity' ] = expandPath( '/modules/cbsecurity' );
-	// this.mappings[ '/models' ] = expandPath( '../app/models' );
 
-	// this.mappings[ '/coldbox' ] = expandPath( '../org/coldbox' );
-	// this.mappings[ '/testbox' ] = expandPath( '../org/testbox' );
-
-	this.datasources[ '{{dsn}}' ] = {
+	this.datasources[ getProfileString( '.env', 'datasource', 'DB_DATASOURCE' ) ] = {
 // required
-		 type: 'mysql'
-		,host: getProfileString( '.env', 'datasource', 'HOST' )
-		,port: getProfileString( '.env', 'datasource', 'PORT' )
-		,database: getProfileString( '.env', 'datasource', 'DATABASE' )
-		,username: getProfileString( '.env', 'datasource', 'USERNAME' )
-		,password: getProfileString( '.env', 'datasource', 'PASSWORD' )
+		 type: getProfileString( '.env', 'datasource', 'DB_DRIVER' )
+		,host: getProfileString( '.env', 'datasource', 'DB_HOST' )
+		,port: getProfileString( '.env', 'datasource', 'DB_PORT' )
+		,database: getProfileString( '.env', 'datasource', 'DB_SCHEMA' )
+		,username: getProfileString( '.env', 'datasource', 'DB_USER' )
+		,password: getProfileString( '.env', 'datasource', 'DB_PASSWORD' )
 // optional
 		,connectionLimit: 100 // how many connections are allowed maximal (-1 == infiniti)
 		// ,connectionTimeout: 1 // connection timeout in minutes (0 == connection is released after usage)
 		,timezone: 'UTC'  // if set Lucee change the environment timezone
 		,custom: { // a struct that contains type specific settings
-			 useUnicode: true
+				useUnicode: true
 			,useLegacyDatetimeCode: true
 			,characterEncoding: 'UTF-8'
 		}
 	};
 
-	this.datasource = '{{dsn}}';
+	this.datasource = getProfileString( '.env', 'datasource', 'DB_DATASOURCE' );
 
 // Java Integration
 	this.javaSettings = {
-		loadPaths = [ '/app/lib' ],
+		loadPaths = [ '/lib' ],
 		loadColdFusionClassPath = true,
 		reloadOnChange= false
 	};
