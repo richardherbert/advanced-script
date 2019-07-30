@@ -48,7 +48,7 @@
 
 // custom settings
 		settings = {
-			 adminEmailAddress: 'admin@{{domin}}.{{tld}}'
+			 adminEmailAddress: 'admin@{{domain}}.{{tld}}'
 			,github: {
 				owner: '{{githubOwner}}'
 			   ,repo: '{{githubRepo}}'
