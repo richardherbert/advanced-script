@@ -1,11 +1,9 @@
 component table='users' extends='BaseBean' accessors=true {
-// component table='users' extends='BaseBean' scope='session' accessors=true {
 	property name='title';
 	property name='givenName';
 	property name='familyName';
 
 	property name='emailAddress';
-	// property name='roleID';
 
 	property name='passwordSalt';
 	property name='password';
@@ -46,26 +44,6 @@ component table='users' extends='BaseBean' accessors=true {
 
 		return passwordHash;
 	}
-
-
-
-/*
-	function role() { // a user has a role
-		return belongsTo( 'Role' );
-	}
-
-	function language() { // a user has a language
-		return belongsTo( 'Language' );
-	}
-
-	boolean function hasRole( required string role ) {
-		if( this.getRole().getName() == role ) {
-			return true;
-		}
-
-		return false;
-	}
-*/
 
 	function getFullname() {
 		return retrieveAttribute( 'firstname' ) & ' ' &retrieveAttribute( 'lastname' );
