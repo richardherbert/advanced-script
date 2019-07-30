@@ -8,7 +8,7 @@
 
 		entityName = 'User';
 
-		event.setLayout( 'signin' );
+		event.setLayout( 'blank' );
 	}
 
 	function index( event, rc, prc ) {}
