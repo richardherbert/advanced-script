@@ -1,8 +1,10 @@
 component {
 	function up( schema, query ) {
-		schema.dropIfExists( 'cbsecurity' );
+		var tableName = 'cbsecurity';
 
-		schema.create( 'cbsecurity', function( table ) {
+		schema.dropIfExists( tableName );
+
+		schema.create( tableName, function( table ) {
 			table.uuid( 'id' ).primaryKey();
 
             table.text( 'whitelist' );
@@ -14,7 +16,7 @@ component {
 			table.integer( 'sortOrder', 10 ).unsigned().default( '0' );
 		} );
 
-		query.from( 'cbsecurity' )
+		query.from( tableName )
 			.insert(
 				values = {
 					 'id' = createUUID()
@@ -31,6 +33,6 @@ component {
 	}
 
 	function down( schema ) {
-		schema.dropIfExists( 'cbsecurity' );
+		schema.dropIfExists( tableName );
 	}
 }

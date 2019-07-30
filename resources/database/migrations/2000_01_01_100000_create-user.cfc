@@ -1,8 +1,10 @@
 component {
 	function up( schema, query ) {
-		schema.dropIfExists( 'users' );
+		var tableName = 'users';
 
-		schema.create( 'users', function( table ) {
+		schema.dropIfExists( tableName );
+
+		schema.create( tableName, function( table ) {
 			table.uuid( 'id' ).primaryKey();
 
             table.string( 'title' ).nullable();
@@ -23,7 +25,7 @@ component {
 			table.datetime( 'dateDeleted' ).nullable();
 		} );
 
-		query.from( 'users' )
+		query.from( tableName )
 			.insert(
 				values = {
 					'id' = createUUID()
@@ -34,6 +36,6 @@ component {
 	}
 
 	function down( schema ) {
-		schema.dropIfExists( 'users' );
+		schema.dropIfExists( tableName );
 	}
 }
