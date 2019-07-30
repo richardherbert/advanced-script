@@ -8,7 +8,7 @@
 
 		entityName = 'User';
 
-		event.setLayout( 'blank' );
+		event.setLayout( 'signin' );
 	}
 
 	function index( event, rc, prc ) {}
@@ -40,7 +40,7 @@
 		var response = UserService.signin( rc );
 
 		if ( response.isFailure ) {
-			prc.MessageManager.setMessage(
+			MessageManager.setMessage(
 				 type='error'
 				,message='Sorry, your sign in details have not been recognised'
 			);
@@ -73,7 +73,7 @@
 		);
 
 		if( validationResults.hasErrors() ) {
-			prc.MessageManager.setMessage(
+			MessageManager.setMessage(
 				 type='error'
 				,messageArray=validationResults.getAllErrors()
 			);
@@ -86,7 +86,7 @@
 			.get();
 
 		if( users.len() != 1 ) {
-			prc.MessageManager.setMessage(
+			MessageManager.setMessage(
 				type='error'
 				,message='Sorry, there is problem with the email address you provided'
 			);
@@ -99,7 +99,7 @@
 		var response = UserService.passwordReset( rc.emailAddress );
 
 		if( response.isFailure ) {
-			prc.MessageManager.setMessage(
+			MessageManager.setMessage(
 				type='error'
 				,message='Sorry, there is problem with the email address you provided'
 			);
@@ -107,9 +107,9 @@
 			relocate( 'signin.forgottenpassword' );
 		}
 
-		prc.MessageManager.setMessage(
+		MessageManager.setMessage(
 			type='success'
-			,message='An email has been sent to your inbox with details on how to choose a new password'
+			,message='An email has been sent to your inbox with the details on how to choose a new password'
 		);
 
 		relocate( 'signin' );
@@ -138,7 +138,7 @@
 		);
 
 		if( validationResults.hasErrors() ) {
-			prc.MessageManager.setMessage(
+			MessageManager.setMessage(
 				type='error'
 				,messageArray=validationResults.getAllErrors()
 			);
@@ -149,7 +149,7 @@
 		var response = UserService.resetPassword( rc );
 
 		if( response.isFailure ) {
-			prc.MessageManager.setMessage(
+			MessageManager.setMessage(
 				type='error'
 				,message='Sorry, that token is no longer valid'
 			);
@@ -157,7 +157,7 @@
 			relocate( 'signin.forgottenpassword' );
 		}
 
-		prc.MessageManager.setMessage(
+		MessageManager.setMessage(
 			type='success'
 			,message='Your password has been reset. Please use it here to sign in'
 		);
