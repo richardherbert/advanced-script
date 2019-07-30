@@ -80,14 +80,7 @@
 
 // logbox dsl
 		logBox = {
-// define appenders
-			appenders = {
-				coldboxTracer = { class='coldbox.system.logging.appenders.ConsoleAppender' }
-			},
-// root logger
-			root = { levelmax='INFO', appenders='*' },
-// implicit level categories
-			info = [ 'coldbox.system' ]
+			configFile = 'config/LogBox'
 		};
 
 // layout settings
