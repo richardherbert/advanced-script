@@ -48,15 +48,17 @@
 
 // custom settings
 		settings = {
-			adminEmailAddress: 'admin@{{domin}}.{{tld}}'
+			 adminEmailAddress: 'admin@{{domin}}.{{tld}}'
+			,github: {
+				owner: '{{githubOwner}}'
+			   ,repo: '{{githubRepo}}'
+			   ,branchRef: '{{githubBranch}}'
+		   }
 		};
 
-// environment settings, create a detectenvironment() method to detect it yourself.
-// create a function with the name of the environment so it can be executed if that environment is
-// detected the value of the environment is a list of regex patterns to match the cgi.http_host.
-		environments = {
-			development = '^{{domain}},^localhost,^127\.0\.0\.1'
-		};
+		dotenv = {
+			fileName = '../.ini'
+		}
 
 		mailsettings = {
 			tokenMarker = '@'
@@ -70,8 +72,11 @@
 			mailguncfc = {
 				 secretApiKey: '{{mailgunAPIKey}}'
 				,publicApiKey: '{{mailgunAPIPublicKey}}'
-				,domain: '{{domain}}.{{tld}}'
+				,domain: '{{subdomain}}.{{domain}}.{{tld}}'
 			}
+			,cbgithub = {
+				token: getProfileString( expandPath( '../.ini' ), 'cbgithub', 'GITHUB_TOKEN' )
+		   }
 		};
 
 // module directives
@@ -112,9 +117,16 @@
 		];
 	}
 
-/**
-* Development environment
-*/
+	function detectEnvironment() {
+		var environment = getProfileString( expandPath( '../.ini' ), 'application', 'ENVIRONMENT' );
+
+		if( environment == '' ) {
+			return 'production';
+		}
+
+		return environment;
+	}
+
 	function development() {
 		coldbox.reinitPassword = '1';
 
@@ -132,5 +144,7 @@
 		mailsettings.username = '';
 		mailsettings.password = '';
 		mailsettings.protocol.class = 'modules.cbmailservices.models.protocols.CFMailProtocol';
+
+		settings.github.branchRef = 'cbgithub'
 	}
 }
