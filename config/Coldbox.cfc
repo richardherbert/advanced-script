@@ -41,7 +41,9 @@
 // application aspects
 			handlerCaching = true,
 			eventCaching = true,
-			viewCaching = true
+			viewCaching = true,
+// will automatically do a mapDirectory() on your `models` for you.
+			autoMapModels = true
 		};
 
 // custom settings
