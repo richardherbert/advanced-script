@@ -1,0 +1,16 @@
+
+image: samueldebruyn/debian-git
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y git-ftp
+
+upload:
+  stage: deploy
+  only:
+    - master
+  script:
+    - git ftp init --user $FTP_USERNAME --passwd $FTP_PASSWORD $FTP_CONNECTION
+
+    - curl https://$DOMAIN/?fwreinit=$FW_REINIT
+
