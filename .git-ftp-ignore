@@ -1,0 +1,22 @@
+.env
+.cfconfig.json
+.cfformat.json
+.cflintrc
+.editorconfig
+.env-example
+.gitattributes
+
+server.json
+box.json
+testbox/*
+tests/*
+resources/*
+
+bitbucket-pipelines.yml
+
+.gitignore
+*/.gitignore      # ignore files in sub directories
+*/.gitkeep
+.git-ftp-ignore
+.git-ftp-include
+.gitlab-ci.yml
