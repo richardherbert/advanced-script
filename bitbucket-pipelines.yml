@@ -12,6 +12,6 @@ pipelines:
           - apt-get init
           - apt-get -qq install git-ftp
 
-          - git ftp push --user $FTP_USERNAME --passwd $FTP_PASSWORD $FTP_CONNECTION
+          - git ftp init --user $FTP_USERNAME --passwd $FTP_PASSWORD $FTP_CONNECTION
 
           - curl https://{{domain}}/?fwreinit=$FW_REINIT
